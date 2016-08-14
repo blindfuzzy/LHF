@@ -1,4 +1,4 @@
-#LHF: Low Hanging Fruit a recon tool for penetration testing.
+#LHF: Low Hanging Fruit a recon tool for penetration testing
 
 
 #To install dependencies:
