@@ -1,3 +1,6 @@
+#LHF Low Hanging Fruit a recon tool for penetration testing.
+
+
 #To install dependencies:
 
 ./Install.sh
