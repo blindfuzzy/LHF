@@ -7,7 +7,7 @@
 
 #To start: 
 
-./reconscan.py
+./LHF.py
 
 ```python
 [+]  Checking permissions
@@ -19,7 +19,7 @@
 
 Example:
 ```bash
-cd /opt/Recon/results
+cd /opt/LHF/results
 ```
 
 The results output includes nmap files...arachni files..nikto files..pretty much every fucking file from every scan the tools does can be found in this folder. 
