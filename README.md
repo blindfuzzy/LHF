@@ -24,7 +24,7 @@ cd /opt/LHF/results
 
 The results output includes nmap files...arachni files..nikto files..pretty much every fucking file from every scan the tools does can be found in this folder. 
 
-###This tool is meant to be "modular" i.e. you can add a new tool in the Modules folder and then add it into the reconscan.py file and it will be included in the scan. 
+###This tool is meant to be "modular" i.e. you can add a new tool in the Modules folder and then add it into the LHF.py file and it will be included in the scan. 
 
 ####This tool will only scan a single IP at a time for the moment. I did this for testing purposes and because I am lazy.
 
