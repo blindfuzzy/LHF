@@ -31,6 +31,11 @@ The results output includes nmap files...arachni files..nikto files..pretty much
 
 ####This tool will only scan a single IP at a time for the moment. I did this for testing purposes and because I am lazy.
 
-##FYI, it will look like it's not doing anything but it actually is...I have nothing in place such as a progress bar. Output will stream as tasks are ran/completed. 
+####FYI, it will look like it's not doing anything but it actually is...I have nothing in place such as a progress bar. Output will stream as tasks are ran/completed. 
 
+#To Do:
++ Test on other security distros 
++ Implement "pip install"
++ Add new features
++ Implement ip range/domain scanning
 
