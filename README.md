@@ -1,4 +1,4 @@
-#Petah this is towah
+###This has been only tested on the newest Kali Linux Distro
 
 
 #LHF: Low Hanging Fruit a recon tool for penetration testing
