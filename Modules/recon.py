@@ -118,7 +118,7 @@ def multProc(targetin, scanip, port):
 def getIp():
     """ Defines the ip range to be scanned """
     try:
-        ip_start = raw_input("\033[1;37m[-]  Please enter the ip to scan (example 192.168.0.1)  : \033[1;m")
+        ip_start = raw_input("\033[1;37m[-]  Please enter the ip/domain to scan (example 192.168.0.1 or www.target.com)  : \033[1;m")
 
         DNS = gethostbyname(ip_start) #domain to ip thanks TylerP
 
