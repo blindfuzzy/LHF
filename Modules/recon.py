@@ -9,6 +9,7 @@ import sys
 import psutil
 from selenium import webdriver
 from IPy import IP
+from socket import gethostbyname
 
 def bootstrap():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -118,7 +119,11 @@ def getIp():
     """ Defines the ip range to be scanned """
     try:
         ip_start = raw_input("\033[1;37m[-]  Please enter the ip to scan (example 192.168.0.1)  : \033[1;m")
-        ip = IP(ip_start)
+
+        DNS = gethostbyname(ip_start) #domain to ip thanks TylerP
+
+        ip = IP(DNS)
+
         return ip
     except Exception as e:
         raise Exception(e)
