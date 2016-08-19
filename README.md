@@ -1,3 +1,8 @@
+#Do not download from this beta-testing branch. It is only meant for testing purposes and I can not guarentee functionality. 
+
+
+
+
 ###This has been only tested on the newest Kali Linux Distro
 
 
