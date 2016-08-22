@@ -58,7 +58,7 @@ try:
     f.write(resultsssl)
     f.close()
 
-    ARACHNI = "arachni {0}{1}:{2} --output-only-positives --scope-include-subdomains --report-save-path '/opt/Recon/results/{1}/{1}_{2}_arachni.bin'".format(header, ip_address, port)
+    ARACHNI = "arachni {0}{1}:{2} --output-only-positives --scope-include-subdomains --report-save-path '/opt/LHF/results/{1}/{1}_{2}_arachni.bin'".format(header, ip_address, port)
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
     print('\033[1;37m[-]  |     Starting ARACHNI scan for {0}:{1} \033[1;m'.format(ip_address, port))
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
