@@ -41,7 +41,7 @@ try:
 
     #NIKTOSCAN = "nikto -host {0} -p {1} -o ./results/{0}/{0}.{1}_nikto.txt".format(ip_address, port)
     #print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
-    #print('\033[1;37m[-]  |     Starting NIKTO scan for {0}:{1} \033[1;m'.format(ip_address, port))
+   # print('\033[1;37m[-]  |     Starting NIKTO scan for {0}:{1} \033[1;m'.format(ip_address, port))
     #print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
     #resultsnikto = subprocess.check_output(NIKTOSCAN, shell=True)
     #recon.logparsernikto(resultsnikto)
@@ -53,6 +53,18 @@ try:
     resultsssl = subprocess.check_output(SSLSCAN, shell=True)
     recon.logparsertxt(resultsssl)
     out = "./results/{0}/{0}.{1}_sslscan.txt".format(ip_address, port)
+    print ('\033[1;33m[+]  report written to: {0}\033[1;m'.format(out))
+    f = open(out, "w")
+    f.write(resultsssl)
+    f.close()
+
+    LBD = "lbd {0}".format(ip_address)
+    print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
+    print('\033[1;37m[-]  |     Starting Load Balancing scan for {0}:{1} \033[1;m'.format(ip_address))
+    print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
+    resultsssl = subprocess.check_output(LBD, shell=True)
+    recon.logparsertxt(resultsssl)
+    out = "./results/{0}/{0}._load-balancing.txt".format(ip_address)
     print ('\033[1;33m[+]  report written to: {0}\033[1;m'.format(out))
     f = open(out, "w")
     f.write(resultsssl)
@@ -76,4 +88,3 @@ try:
 except:
     print('\033[1;31m[-]  HTTP script scan for {0}:{1} had some errors.\033[1;m'.format(ip_address, port))
 os.system('stty echo')
-
