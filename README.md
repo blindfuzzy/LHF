@@ -18,7 +18,7 @@
 [+]  Rockyou wordlist is decompressed!
 [-]  Please enter the ip to scan (example 192.168.0.1)  : <target ip here>
 ```
-##A "results" folder will be created after inputting the target ip. This folder can be found in the Recon directory. 
+##A "results" folder will be created after inputting the target ip. This folder can be found in the LHF directory. 
 
 Example:
 ```bash
