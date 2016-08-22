@@ -25,7 +25,7 @@ Example:
 ```bash
 cd /opt/LHF/results
 ```
-##Highly, reccomended you clone this into your /opt folder in Kali until I fix the code...unless you feel like changing the code round to whatever directory you have it in. This is low priority at the moment. 
+##Highly, reccomended you clone this into your /opt folder in Kali until I fix the code...unless you feel like changing the code around to whatever directory you have it in. This is low priority at the moment. 
 
 The results output includes nmap files...arachni files...pretty much every fucking file from every scan the tools does can be found in this folder. 
 
@@ -42,8 +42,8 @@ The results output includes nmap files...arachni files...pretty much every fucki
 + Implement ip range/domain scanning
 
 #New (08/22/2016):
-+ Domain Scanning (still working on ip range scanning aka /24 stuff. 
-+ Load Balancer detector (note: saw lots of false negatives when "www" is used before the url. Reccomend you skip using that.)
++ Domain Scanning (Still working on ip range scanning aka /24 stuff.) 
++ Load Balancer detector (note: Saw lots of false negatives when "www" is used before the url. Reccomend you skip using that.)
 + Got rid of Nikto it pumps out the same results as Arachni and slows things down. 
 + We now have a beta-testing branch...I deffinitely don't reccomend cloning from that branch as it is highly unstable, unless of course you would like to help in the development of LHF. Once things in that branch are thoroughly tested we will push things out to the master branch.
 
