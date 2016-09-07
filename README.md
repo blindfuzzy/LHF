@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c8b3374f4de74d6dbe3372c532e31e10)](https://www.codacy.com/app/robin-williams/LHF?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=blindfuzzy/LHF&amp;utm_campaign=Badge_Grade)
 ###This has been only tested on the newest Kali Linux Distro
 
 
