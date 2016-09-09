@@ -1344,7 +1344,7 @@ def check_weak_perms(object_name, object_type_s, perms):
 		else:
 			object_type_s = 'directory'
 	
-	if object_type == None:
+	if object_type is None:
 		print "ERROR: Unknown object type %s" % object_type_s
 		exit(1)
 		
@@ -1365,7 +1365,7 @@ def check_weak_write_perms_by_sd(object_name, object_type_s, sd):
 	
 def check_weak_perms_sd(object_name, object_type_s, sd, perms):
 	dacl= sd.GetSecurityDescriptorDacl()
-	if dacl == None:
+	if dacl is None:
 		print "No Discretionary ACL"
 		return []
 
@@ -1439,7 +1439,7 @@ def dump_perms(object_name, object_type_s, options={}):
 		else:
 			object_type_s = 'directory'
 	
-	if object_type == None:
+	if object_type is None:
 		print "ERROR: Unknown object type %s" % object_type_s
 		exit(1)
 		
@@ -1460,7 +1460,7 @@ def dump_sd(object_name, object_type_s, sd, options={}):
 	if not sd:
 		return 
 	dacl = sd.GetSecurityDescriptorDacl()
-	if dacl == None:
+	if dacl is None:
 		print "No Discretionary ACL"
 		return []
 
@@ -1499,7 +1499,7 @@ def dump_sd(object_name, object_type_s, sd, options={}):
 	
 def dump_acl(object_name, object_type_s, sd, options={}):
 	dacl = sd
-	if dacl == None:
+	if dacl is None:
 		print "No Discretionary ACL"
 		return []
 
@@ -3026,7 +3026,7 @@ if not (
 ):
 	usage()
 
-if report_file_name == None:
+if report_file_name is None:
 	report_file_name = "privesc-report-" + socket.gethostname() + ".html"
 
 # Better open the report file now in case there's a permissions problem
