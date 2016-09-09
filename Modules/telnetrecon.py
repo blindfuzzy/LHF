@@ -15,7 +15,7 @@ try:
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
     print('\033[1;37m[-]  |     Starting hydra TELNET scan against {0}:{1}\033[1;m'.format(ip_address, port))
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
-    HYDRA = "hydra -L /usr/share/wordlists/metasploit/unix_users.txt -P /usr/share/wordlists/rockyou.txt -f -o ./results/%s/%s_telnethydra.txt -u %s -s %s telnet" % (ip_address, ip_address, ip_address, port)
+    HYDRA = "hydra -L /usr/share/wordlists/metasploit/unix_users.txt -P /usr/share/wordlists/rockyou.txt -f -o ./results/{0!s}/{1!s}_telnethydra.txt -u {2!s} -s {3!s} telnet".format(ip_address, ip_address, ip_address, port)
     try:
         with open(os.devnull, "w") as f:
             results = subprocess.check_output(HYDRA, shell=True, stdout=f)
@@ -29,7 +29,7 @@ try:
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
     print('\033[1;37m[-]  |     Starting TELNET script scan for {0}:{1}\033[1;m'.format(ip_address, port))
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
-    TELNETSCAN = "nmap -sV -Pn -vv -p %s --script=telnet-* -oN './results/%s/%s_telnet.nmap' %s" % (port, ip_address, ip_address, ip_address)
+    TELNETSCAN = "nmap -sV -Pn -vv -p {0!s} --script=telnet-* -oN './results/{1!s}/{2!s}_telnet.nmap' {3!s}".format(port, ip_address, ip_address, ip_address)
     results = subprocess.check_output(TELNETSCAN, shell=True)
     recon.logparsertxt(results)
     outfile = "results/{0}/{0}_telnetrecon.txt".format(ip_address)

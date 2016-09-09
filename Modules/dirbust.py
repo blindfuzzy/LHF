@@ -20,7 +20,7 @@ try:
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
     for filename in os.listdir(folder):
         outfile = " -o " + "./results/" + name + "/" + name + "_dirb_" + filename + "_" + port
-        DIRBSCAN = "dirb %s %s/%s %s -S -r" % (url, folder, filename, outfile)
+        DIRBSCAN = "dirb {0!s} {1!s}/{2!s} {3!s} -S -r".format(url, folder, filename, outfile)
         try:
             results = subprocess.check_output(DIRBSCAN, shell=True)
             resultarr = results.split("\n")

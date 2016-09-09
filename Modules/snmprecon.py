@@ -15,7 +15,7 @@ try:
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
     print('\033[1;37m[-]  |     Starting SNMP scan for {0}\033[1;m'.format(ip_address))
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
-    ONESIXONESCAN = "onesixtyone %s" % (ip_address)
+    ONESIXONESCAN = "onesixtyone {0!s}".format((ip_address))
     results = subprocess.check_output(ONESIXONESCAN, shell=True).strip()
 
 

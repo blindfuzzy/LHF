@@ -59,7 +59,7 @@ class SAMRDump:
         addr. Addr is a valid host name or IP address.
         """
 
-        logging.info('Retrieving endpoint list from %s' % addr)
+        logging.info('Retrieving endpoint list from {0!s}'.format(addr))
 
         # Try all requested protocols until one works.
         entries = []
@@ -67,7 +67,7 @@ class SAMRDump:
             protodef = SAMRDump.KNOWN_PROTOCOLS[protocol]
             port = protodef[1]
 
-            logging.info("Trying protocol %s..." % protocol)
+            logging.info("Trying protocol {0!s}...".format(protocol))
             rpctransport = transport.SMBTransport(addr, port, r'\samr', self.__username, self.__password, self.__domain, self.__lmhash, self.__nthash, self.__aesKey, doKerberos = self.__doKerberos)
 
             try:
@@ -82,7 +82,7 @@ class SAMRDump:
 
         for entry in entries:
             (username, uid, user) = entry
-            base = "%s (%d)" % (username, uid)
+            base = "{0!s} ({1:d})".format(username, uid)
             print base + '/FullName:', user['FullName']
             print base + '/UserComment:', user['UserComment']
             print base + '/PrimaryGroupId:', user['PrimaryGroupId']
@@ -94,7 +94,7 @@ class SAMRDump:
             if 1 == num:
                 logging.info('Received one entry.')
             else:
-                logging.info('Received %d entries.' % num)
+                logging.info('Received {0:d} entries.'.format(num))
         else:
             logging.info('No entries received.')
 
@@ -116,9 +116,9 @@ class SAMRDump:
 
             print 'Found domain(s):'
             for domain in domains:
-                print " . %s" % domain['Name']
+                print " . {0!s}".format(domain['Name'])
 
-            logging.info("Looking up users in domain %s" % domains[0]['Name'])
+            logging.info("Looking up users in domain {0!s}".format(domains[0]['Name']))
 
             resp = samr.hSamrLookupDomainInSamServer(dce, serverHandle,domains[0]['Name'] )
 
@@ -139,7 +139,7 @@ class SAMRDump:
 
                 for user in resp['Buffer']['Buffer']:
                     r = samr.hSamrOpenUser(dce, domainHandle, samr.USER_READ_GENERAL | samr.USER_READ_PREFERENCES | samr.USER_READ_ACCOUNT, user['RelativeId'])
-                    print "Found user: %s, uid = %d" % (user['Name'], user['RelativeId'] )
+                    print "Found user: {0!s}, uid = {1:d}".format(user['Name'], user['RelativeId'] )
     
                     info = samr.hSamrQueryInformationUser2(dce, r['UserHandle'],samr.USER_INFORMATION_CLASS.UserAllInformation)
                     entry = (user['Name'], user['RelativeId'], info['Buffer']['All'])
@@ -150,7 +150,7 @@ class SAMRDump:
                 status = resp['ErrorCode']
 
         except ListUsersException, e:
-            logging.critical("Error listing users: %s" % e)
+            logging.critical("Error listing users: {0!s}".format(e))
 
         dce.disconnect()
 

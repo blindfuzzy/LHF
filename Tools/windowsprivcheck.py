@@ -1345,7 +1345,7 @@ def check_weak_perms(object_name, object_type_s, perms):
 			object_type_s = 'directory'
 	
 	if object_type == None:
-		print "ERROR: Unknown object type %s" % object_type_s
+		print "ERROR: Unknown object type {0!s}".format(object_type_s)
 		exit(1)
 		
 	try: 
@@ -1405,7 +1405,7 @@ def check_weak_perms_sd(object_name, object_type_s, sd, perms):
 			if principle_is_trusted(owner_name, owner_domain):
 				continue
 			else:
-				principle = "CREATOR OWNER [%s]" % owner_fq
+				principle = "CREATOR OWNER [{0!s}]".format(owner_fq)
 		
 		for i in ("ACCESS_ALLOWED_ACE_TYPE", "ACCESS_DENIED_ACE_TYPE", "SYSTEM_AUDIT_ACE_TYPE", "SYSTEM_ALARM_ACE_TYPE"):
 			if getattr(ntsecuritycon, i) == ace[0][0]:
@@ -1440,7 +1440,7 @@ def dump_perms(object_name, object_type_s, options={}):
 			object_type_s = 'directory'
 	
 	if object_type == None:
-		print "ERROR: Unknown object type %s" % object_type_s
+		print "ERROR: Unknown object type {0!s}".format(object_type_s)
 		exit(1)
 		
 	try: 
@@ -1528,7 +1528,7 @@ def dump_acl(object_name, object_type_s, sd, options={}):
 				#print "[D] Ignoring trusted principle (creator owner) %s\\%s" % (principle, domain)
 				continue
 			else:
-				principle = "CREATOR OWNER [%s\%s]" % (domain, principle)
+				principle = "CREATOR OWNER [{0!s}\{1!s}]".format(domain, principle)
 		
 		for i in ("ACCESS_ALLOWED_ACE_TYPE", "ACCESS_DENIED_ACE_TYPE", "SYSTEM_AUDIT_ACE_TYPE", "SYSTEM_ALARM_ACE_TYPE"):
 			if getattr(ntsecuritycon, i) == ace[0][0]:
@@ -1663,7 +1663,7 @@ def audit_processes():
 	pids = win32process.EnumProcesses()
 	for pid in sorted(pids):
 		print "---------------------------------------------------------"
-		print "PID: %s" % pid
+		print "PID: {0!s}".format(pid)
 		# TODO there's a security descriptor for each process accessible via GetSecurityInfo according to http://msdn.microsoft.com/en-us/library/ms684880%28VS.85%29.aspx
 		
 		ph = 0
@@ -1702,7 +1702,7 @@ def audit_processes():
 			gotexe = 1
 		except:
 			pass
-		print "Filename: %s" % exe
+		print "Filename: {0!s}".format(exe)
 			
 		gottokenh = 0
 		
@@ -1713,17 +1713,17 @@ def audit_processes():
 			sidObj, intVal = win32security.GetTokenInformation(tokenh, TokenUser)
 			if sidObj:
 				accountName, domainName, accountTypeInt = win32security.LookupAccountSid(remote_server, sidObj)
-				print "TokenUser: %s\%s (type %s)" % (domainName, accountName, accountTypeInt) 
+				print "TokenUser: {0!s}\{1!s} (type {2!s})".format(domainName, accountName, accountTypeInt) 
 			
 			sidObj =  win32security.GetTokenInformation(tokenh, TokenOwner)
 			if sidObj:
 				accountName, domainName, accountTypeInt = win32security.LookupAccountSid(remote_server, sidObj)
-				print "TokenOwner: %s\%s (type %s)" % (domainName, accountName, accountTypeInt) 
+				print "TokenOwner: {0!s}\{1!s} (type {2!s})".format(domainName, accountName, accountTypeInt) 
 				
 			sidObj =  win32security.GetTokenInformation(tokenh, TokenPrimaryGroup)
 			if sidObj:
 				accountName, domainName, accountTypeInt = win32security.LookupAccountSid(remote_server, sidObj)
-				print "TokenPrimaryGroup: %s\%s (type %s)" % (domainName, accountName, accountTypeInt) 
+				print "TokenPrimaryGroup: {0!s}\{1!s} (type {2!s})".format(domainName, accountName, accountTypeInt) 
 		except:
 			print "OpenProcessToken with TOKEN_QUERY: Failed"
 			print "TokenUser: Unknown"
@@ -1760,7 +1760,7 @@ def audit_processes():
 		# print "EnumProcessModules: Success"
 		
 		if ph:
-			print "IsWow64 Process: %s" % win32process.IsWow64Process(ph)
+			print "IsWow64 Process: {0!s}".format(win32process.IsWow64Process(ph))
 		
 		if gottokenh:
 			vprint("OpenProcessToken with TOKEN_QUERY: Success")
@@ -1790,7 +1790,7 @@ def audit_processes():
 				print "Token Source: Unknown (Access Denied)"
 				
 			try:
-				print "TokenImpersonationLevel: %s" % win32security.GetTokenInformation(tokenh, TokenImpersonationLevel) # doesn't work on xp
+				print "TokenImpersonationLevel: {0!s}".format(win32security.GetTokenInformation(tokenh, TokenImpersonationLevel)) # doesn't work on xp
 			except:
 				pass
 			
@@ -1799,7 +1799,7 @@ def audit_processes():
 				if r == 0:
 					print "TokenHasRestrictions: 0 (not filtered)"
 				else:
-					print "TokenHasRestrictions: %s (token has been filtered)" % r
+					print "TokenHasRestrictions: {0!s} (token has been filtered)".format(r)
 			except:
 				pass
 			
@@ -1812,23 +1812,23 @@ def audit_processes():
 				elif e == 3:
 					print "TokenElevationType: TokenElevationTypeLimited"
 				else:
-					print "TokenElevationType: Unknown (%s)" % e
+					print "TokenElevationType: Unknown ({0!s})".format(e)
 			except:
 				pass
 				
 			try:
-				print "TokenUIAccess: %s" % win32security.GetTokenInformation(tokenh, TokenUIAccess) # doesn't work on xp
+				print "TokenUIAccess: {0!s}".format(win32security.GetTokenInformation(tokenh, TokenUIAccess)) # doesn't work on xp
 			except:
 				pass
 			
 			try:
-				print "TokenLinkedToken: %s" % win32security.GetTokenInformation(tokenh, TokenLinkedToken) # vista
+				print "TokenLinkedToken: {0!s}".format(win32security.GetTokenInformation(tokenh, TokenLinkedToken)) # vista
 			except:
 				pass
 			
 			try:
-				print "TokenLogonSid: %s" % win32security.GetTokenInformation(tokenh, TokenLogonSid) # doesn't work on xp
-				print "TokenElevation: %s" % win32security.GetTokenInformation(tokenh, TokenElevation) # vista
+				print "TokenLogonSid: {0!s}".format(win32security.GetTokenInformation(tokenh, TokenLogonSid)) # doesn't work on xp
+				print "TokenElevation: {0!s}".format(win32security.GetTokenInformation(tokenh, TokenElevation)) # vista
 			except:
 				pass
 			
@@ -1839,7 +1839,7 @@ def audit_processes():
 					user = domainName + "\\" + accountName + " (" + win32security.ConvertSidToStringSid(sid) + ")"
 				except:
 					user = win32security.ConvertSidToStringSid(sid)
-				print "TokenIntegrityLevel: %s %s" % (user, i)
+				print "TokenIntegrityLevel: {0!s} {1!s}".format(user, i)
 			except:
 				pass
 			
@@ -1854,7 +1854,7 @@ def audit_processes():
 				elif m == 3:
 					print "TokenMandatoryPolicy: POLICY_VALID_MASK"
 				else:
-					print "TokenMandatoryPolicy: %s" % m
+					print "TokenMandatoryPolicy: {0!s}".format(m)
 			except:
 				pass
 			
@@ -1889,7 +1889,7 @@ def audit_processes():
 					user = domainName + "\\" + accountName + " (" + win32security.ConvertSidToStringSid(sid) + ")"
 				except:
 					user = win32security.ConvertSidToStringSid(sid)
-				print "\t%s: %s" % (user, attr_str)
+				print "\t{0!s}: {1!s}".format(user, attr_str)
 			# Link that explains how privs are added / removed from tokens:
 			# http://support.microsoft.com/kb/326256
 			print "\nToken Privileges:"
@@ -1915,7 +1915,7 @@ def audit_processes():
 					attr_str_a.append("REMOVED")
 				if attr_str_a:
 					attr_str = ("|").join(attr_str_a)
-				print "\t%s: %s" % (win32security.LookupPrivilegeName(remote_server, priv_val), attr_str)
+				print "\t{0!s}: {1!s}".format(win32security.LookupPrivilegeName(remote_server, priv_val), attr_str)
 			
 			
 			#print "\nProcess ACL (buggy - probably wrong):"
@@ -1925,14 +1925,14 @@ def audit_processes():
 				# accountName, domainName, accountTypeInt = win32security.LookupAccountSid(remote_server, sidObj)
 				# print "User: %s\%s (type %s)" % (domainName, accountName, accountTypeInt) 				
 		if gotexe:
-			print "\nFile permissions on %s:" % exe
+			print "\nFile permissions on {0!s}:".format(exe)
 			dump_perms(exe, 'file', {'brief': 1})
 			print
 			
 		if mhs and ph:	
 			for mh in mhs:
 				dll = win32process.GetModuleFileNameEx(ph, mh)
-				print "Loaded module: %s" % dll
+				print "Loaded module: {0!s}".format(dll)
 				dump_perms(dll, 'file', {'brief': 1})
 
 	print
@@ -2123,7 +2123,7 @@ def audit_services():
 				print("Binary (clean): [Missing Binary/Remote]")
 		print("Run as:         " + service_info[7])
 		
-		print "\nFile Permissions on executable %s:" % binary
+		print "\nFile Permissions on executable {0!s}:".format(binary)
 		if binary:
 			dump_perms(binary, 'file', {'brief': 1})
 		else:
@@ -2206,9 +2206,9 @@ def print_weak_perms(type, weak_perms, options={}):
 			slash = ""
 		
 		if brief:
-			print "\t%s%s%s%s: %s" % (acl_type, domain, slash, principle, perm)
+			print "\t{0!s}{1!s}{2!s}{3!s}: {4!s}".format(acl_type, domain, slash, principle, perm)
 		else:
-			print "\t%s%s%s%s has permission %s on %s %s" % (acl_type, domain, slash, principle, perm, type, object_name)
+			print "\t{0!s}{1!s}{2!s}{3!s} has permission {4!s} on {5!s} {6!s}".format(acl_type, domain, slash, principle, perm, type, object_name)
 			
 def check_path(path, issue_no):
 	dirs = set(path.split(';'))
@@ -2283,11 +2283,11 @@ def check_user_paths():
 			principle, domain, type = win32security.LookupAccountSid(remote_server, user_sid)
 			user_fq = domain + "\\" + principle
 		except:
-			print "WARNING: Can't convert sid %s to name.  Skipping." % user_sid_s
+			print "WARNING: Can't convert sid {0!s} to name.  Skipping.".format(user_sid_s)
 			continue
 	
 		path = user_path[1]
-		vprint("Checking path of %s" % user_fq)
+		vprint("Checking path of {0!s}".format(user_fq))
 		global tmp_trusted_principles_fq
 		tmp_trusted_principles_fq = (user_fq)
 		check_path(path, "WPC015")
@@ -2385,11 +2385,11 @@ def audit_shares():
 			print "Path:         " + share['path']
 			print "Remark:       " + share['remark']
 			print "Type(s):      " + "|".join(types)
-			print "Reserved:     %s" % share['reserved']
-			print "Passwd:       %s" % share['passwd']
-			print "Current Uses: %s" % share['current_uses']
-			print "Max Uses:     %s" % share['max_uses']
-			print "Permissions:  %s" % share['permissions']
+			print "Reserved:     {0!s}".format(share['reserved'])
+			print "Passwd:       {0!s}".format(share['passwd'])
+			print "Current Uses: {0!s}".format(share['current_uses'])
+			print "Max Uses:     {0!s}".format(share['max_uses'])
+			print "Permissions:  {0!s}".format(share['permissions'])
 			print "Sec. Desc.:   " 
 			dump_sd(share['netname'], 'share', share['security_descriptor'])
 	except:
@@ -2502,24 +2502,24 @@ def audit_passpol():
 	try:
 		data = win32net.NetUserModalsGet(remote_server, 0)
 		for key in data.keys():
-			print "%s: %s" % (key, data[key])
+			print "{0!s}: {1!s}".format(key, data[key])
 		data = win32net.NetUserModalsGet(remote_server, 1)
 		for key in data.keys():
-			print "%s: %s" % (key, data[key])
+			print "{0!s}: {1!s}".format(key, data[key])
 		data = win32net.NetUserModalsGet(remote_server, 2)
 		for key in data.keys():
 			if key == 'domain_id':
-				print "%s: %s" % (key, win32security.ConvertSidToStringSid(data[key]))
+				print "{0!s}: {1!s}".format(key, win32security.ConvertSidToStringSid(data[key]))
 			elif key == 'lockout_threshold' and data[key] == '0':
-				print "%s: %s (accounts aren't locked out)" % (key, data[key])
+				print "{0!s}: {1!s} (accounts aren't locked out)".format(key, data[key])
 			else:
-				print "%s: %s" % (key, data[key])
+				print "{0!s}: {1!s}".format(key, data[key])
 		data = win32net.NetUserModalsGet(remote_server, 3)
 		for key in data.keys():
 			if key == 'lockout_threshold' and data[key] == 0:
-				print "%s: %s (accounts aren't locked out)" % (key, data[key])
+				print "{0!s}: {1!s} (accounts aren't locked out)".format(key, data[key])
 			else:
-				print "%s: %s" % (key, data[key])
+				print "{0!s}: {1!s}".format(key, data[key])
 	except:
 		print "[E] Couldn't get NetUserModals data"
 
@@ -2593,7 +2593,7 @@ def audit_logged_in():
 		while True:
 			users, total, resume = win32net.NetWkstaUserEnum(remote_server, 1 , resume , 999999 )
 			for user in users:
-				print "User logged in: Logon Server=\"%s\" Logon Domain=\"%s\" Username=\"%s\"" % (user['logon_server'], user['logon_domain'], user['username'])
+				print "User logged in: Logon Server=\"{0!s}\" Logon Domain=\"{1!s}\" Username=\"{2!s}\"".format(user['logon_server'], user['logon_domain'], user['username'])
 			if resume == 0:
 				break
 	except:
@@ -2625,11 +2625,11 @@ def audit_host_info():
 		#print win32net.NetWkstaGetInfo(remote_server, 100)
 		#print win32net.NetWkstaGetInfo(remote_server, 101)
 		serverinfo = win32net.NetWkstaGetInfo(remote_server, 102)
-		print "Computer Name: %s" % serverinfo['computername']
-		print "Langroup: %s" % serverinfo['langroup']
-		print "OS: %s.%s" % (serverinfo['ver_major'], serverinfo['ver_minor'])
-		print "Logged On Users: %s" % serverinfo['logged_on_users']
-		print "Lanroot: %s" % serverinfo['lanroot']
+		print "Computer Name: {0!s}".format(serverinfo['computername'])
+		print "Langroup: {0!s}".format(serverinfo['langroup'])
+		print "OS: {0!s}.{1!s}".format(serverinfo['ver_major'], serverinfo['ver_minor'])
+		print "Logged On Users: {0!s}".format(serverinfo['logged_on_users'])
+		print "Lanroot: {0!s}".format(serverinfo['lanroot'])
 		
 		if serverinfo['platform_id'] & win32netcon.PLATFORM_ID_NT:
 			print "Platform: PLATFORM_ID_NT (means NT family, not NT4)"
@@ -2652,11 +2652,11 @@ def audit_host_info():
 		#print "NetServerGetInfo 100" + str(win32net.NetServerGetInfo(remote_server, 100))
 		#print "NetServerGetInfo 101" + str(win32net.NetServerGetInfo(remote_server, 101))
 		serverinfo = win32net.NetServerGetInfo(remote_server, 102)
-		print "Name: %s" % serverinfo['name']
-		print "Comment: %s" % serverinfo['comment']
-		print "OS: %s.%s" % (serverinfo['version_major'], serverinfo['version_minor'])
-		print "Userpath: %s" % serverinfo['userpath']
-		print "Hidden: %s" % serverinfo['hidden']
+		print "Name: {0!s}".format(serverinfo['name'])
+		print "Comment: {0!s}".format(serverinfo['comment'])
+		print "OS: {0!s}.{1!s}".format(serverinfo['version_major'], serverinfo['version_minor'])
+		print "Userpath: {0!s}".format(serverinfo['userpath'])
+		print "Hidden: {0!s}".format(serverinfo['hidden'])
 		
 		if serverinfo['platform_id'] & win32netcon.PLATFORM_ID_NT:
 			print "Platform: PLATFORM_ID_NT (means NT family, not NT4)"
@@ -2783,16 +2783,16 @@ def audit_user_group():
 				break
 		sid, s, i = win32security.LookupAccountName(remote_server, group['name'])
 		sid_string = win32security.ConvertSidToStringSid(sid)
-		print "Group %s has sid %s" % (group['name'], sid_string)
+		print "Group {0!s} has sid {1!s}".format(group['name'], sid_string)
 		for m in members:
-			print "Group %s has member: %s" % (group['name'], m)
+			print "Group {0!s} has member: {1!s}".format(group['name'], m)
 		if verbose:
 			try:
 				privs = win32security.LsaEnumerateAccountRights(ph, sid)
 				for priv in privs:
-					print "Group %s has privilege: %s" % (group['name'], priv)
+					print "Group {0!s} has privilege: {1!s}".format(group['name'], priv)
 			except:
-				print "Group %s: privilege lookup failed " % (group['name'])
+				print "Group {0!s}: privilege lookup failed ".format((group['name']))
 		
 	print
 	print "[+] Non-local Groups"
@@ -2823,16 +2823,16 @@ def audit_user_group():
 				break
 		sid, s, i = win32security.LookupAccountName(remote_server, group['name'])
 		sid_string = win32security.ConvertSidToStringSid(sid)
-		print "Group %s has sid %s" % (group['name'], sid_string)
+		print "Group {0!s} has sid {1!s}".format(group['name'], sid_string)
 		for m in members:
-			print "Group %s has member: %s" % (group['name'], m)
+			print "Group {0!s} has member: {1!s}".format(group['name'], m)
 		if verbose:
 			try:
 				privs = win32security.LsaEnumerateAccountRights(ph, sid)
 				for priv in privs:
-					print "Group %s has privilege: %s" % (group['name'], priv)
+					print "Group {0!s} has privilege: {1!s}".format(group['name'], priv)
 			except:
-				print "Group %s has no privileges" % (group['name'])
+				print "Group {0!s} has no privileges".format((group['name']))
 			
 	print
 	print "[+] Users"
@@ -2865,7 +2865,7 @@ def audit_user_group():
 		gprivs = []
 		sid, s, i = win32security.LookupAccountName(remote_server, user)
 		sid_string = win32security.ConvertSidToStringSid(sid)
-		print "User %s has sid %s" % (user, sid_string)
+		print "User {0!s} has sid {1!s}".format(user, sid_string)
 		groups = win32net.NetUserGetLocalGroups(remote_server, user, 0)
 		for group in groups:
 			gsid, s, i = win32security.LookupAccountName(remote_server, group)
@@ -2874,13 +2874,13 @@ def audit_user_group():
 				gprivs = list(list(gprivs) + list(privs))
 			except:
 				pass
-			print "User %s is in this local group: %s" % (user, group)
+			print "User {0!s} is in this local group: {1!s}".format(user, group)
 		group_list = win32net.NetUserGetGroups(remote_server, user)
 		groups = []
 		for g in group_list:
 			groups.append(g[0])
 		for group in groups:
-			print "User %s is in this non-local group: %s" % (user, group)
+			print "User {0!s} is in this non-local group: {1!s}".format(user, group)
 		if verbose:
 			privs = []
 			try:
@@ -2888,7 +2888,7 @@ def audit_user_group():
 			except:
 				pass
 			for priv in list(set(list(gprivs) + list(privs))):
-				print "User %s has privilege %s" % (user, priv)
+				print "User {0!s} has privilege {1!s}".format(user, priv)
 
 	if verbose:
 		print
@@ -2910,13 +2910,13 @@ def audit_user_group():
 						type_string = "group"
 					if type == 5:
 						type_string = "user"
-					print "Privilege %s (%s) is held by %s\%s (%s)" % (priv, priv_desc, domain, name, type_string)
+					print "Privilege {0!s} ({1!s}) is held by {2!s}\{3!s} ({4!s})".format(priv, priv_desc, domain, name, type_string)
 					# print "Privilege %s is held by %s\%s (%s)" % (priv, domain, name, type_string)
 			except:
 				#print "Skipping %s - doesn't exist for this platform" % priv
 				pass
 
-print "windows-privesc-check v%s (http://pentestmonkey.net/windows-privesc-check)\n" % version
+print "windows-privesc-check v{0!s} (http://pentestmonkey.net/windows-privesc-check)\n".format(version)
 
 # Process Command Line Options
 try:

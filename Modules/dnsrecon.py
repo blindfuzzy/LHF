@@ -10,8 +10,8 @@ if len(sys.argv) != 2:
 
 try:
     ip_address = sys.argv[1]
-    HOSTNAME = "host %s | cut -d ' ' -f5 | cut -d '.' -f1,2,3" % (ip_address)
-    DOMAINNAME = "host %s | cut -d ' ' -f5 | cut -d '.' -f2,3" % (ip_address)
+    HOSTNAME = "host {0!s} | cut -d ' ' -f5 | cut -d '.' -f1,2,3".format((ip_address))
+    DOMAINNAME = "host {0!s} | cut -d ' ' -f5 | cut -d '.' -f2,3".format((ip_address))
     port = 53
 
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
