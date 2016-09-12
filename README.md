@@ -17,7 +17,7 @@
 [+]  Checking permissions
 [-]  Rockyou wordlist is missing trying to decompress...
 [+]  Rockyou wordlist is decompressed!
-[-]  Please enter the ip to scan (example 192.168.0.1 or www.target.com)  : <target ip/url here>
+[-]  Please enter the ip to scan (example 192.168.0.1 or target.com)  : <target ip/url here>
 ```
 
 ##A "results" folder will be created after inputting the target ip. This folder can be found in the LHF directory. 
