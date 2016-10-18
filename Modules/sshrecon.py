@@ -29,7 +29,7 @@ try:
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
     print('\033[1;37m[-]  |     Starting SSH script scan for {0}:{1}\033[1;m'.format(ip_address, port))
     print "\033[1;37m[-]  ----------------------------------------------------------------------------- \033[1;m"
-    SSHSCAN = "nmap -sV -Pn -vv -p {0} --script=ssh-* -oN './results/{1}/{1}_ssh.nmap' {1}".format(port, ip_address)
+    SSHSCAN = "nmap -sV -Pn -vv -p {0} --script=ssh* -oN './results/{1}/{1}_ssh.nmap' {1}".format(port, ip_address)
     results = subprocess.check_output(SSHSCAN, shell=True)
     recon.logparsertxt(results)
     outfile = "results/{0}/{0}_sshrecon.txt".format(ip_address)
