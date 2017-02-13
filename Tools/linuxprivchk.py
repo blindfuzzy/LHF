@@ -301,7 +301,6 @@ sploits= {      "2.2.x-2.4.x ptrace kmod local exploit":{"minver":"2.2", "maxver
 		"2.2.x/2.4.x Privileged Process Hijacking Vulnerability (1)":{"minver":"2.2", "maxver":"2.4.99", "exploitdb":"22362", "lang":"c", "keywords":{"loc":["kernel"], "val":"kernel"}},
 		"2.2.x/2.4.x Privileged Process Hijacking Vulnerability (2)":{"minver":"2.2", "maxver":"2.4.99", "exploitdb":"22363", "lang":"c", "keywords":{"loc":["kernel"], "val":"kernel"}},
 		"Samba 2.2.8 Share Local Privilege Elevation Vulnerability":{"minver":"2.2.8", "maxver":"2.2.8", "exploitdb":"23674", "lang":"c", "keywords":{"loc":["proc","pkg"], "val":"samba"}},
-		"open-time Capability file_ns_capable() - Privilege Escalation Vulnerability":{"minver":"0", "maxver":"99", "exploitdb":"25307", "lang":"c", "keywords":{"loc":["kernel"], "val":"kernel"}},
 		"open-time Capability file_ns_capable() Privilege Escalation":{"minver":"0", "maxver":"99", "exploitdb":"25450", "lang":"c", "keywords":{"loc":["kernel"], "val":"kernel"}},
 }
 
